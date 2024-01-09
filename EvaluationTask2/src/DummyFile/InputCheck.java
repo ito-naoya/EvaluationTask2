@@ -16,7 +16,10 @@ class InputCheck {
 				
 protected boolean isNumeric()				
 {				
-	if (this.str == "") {			
+	//空文字をコンソールから入力時に処理が終了しない不具合
+	//元々 ==　で空文字比較をしていたため、オブジェクトとしての比較結果がfalseとなり戻り値のfalseが返されていたなかった
+	//isEmptyを使った空文字チェックに切り替えて、空文字が入力された場合はfalseを返し「エラー：数値のみ入力してください。」が出力されるようにした
+	if (this.str.isEmpty()) {			
 		return false;		
 	}
 				
@@ -30,7 +33,7 @@ protected boolean isNumeric()
 	return true;			
 }				
 				
-protected boolean checkSize() {				
+protected boolean checkSize() {	
 	if(this.str.length() <= 10) {			
 		if(Math.abs(Integer.parseInt(this.str)) <= 1024*1024*100) {		
 			return true;	
